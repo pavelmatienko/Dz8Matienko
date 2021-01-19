@@ -8,24 +8,32 @@
 </head>
 <body>
     <input type="text" class="form-control" id="js-input" js-input placeholder="What do I need to do" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <button type="button" id="butt" class="btn btn-outline-danger" js-button onclick="myFunction()"> add action </button>
+    <button type="button" id="butt" class="btn btn-outline-danger"> add action </button>
     <h1> My list to do : </h1>
     <div class="alert alert-primary" role="alert">
-        <ol id="js-myList">
+        <ol id="js-myListTodo">
+            <p id="js-text"> ListTodo is empty </p>
         </ol>     
     </div>
+    
     <script>
-        const list = document.getElementById('js-myList');
+        const list = document.getElementById('js-myListTodo');
+        const input = document.getElementById('js-input');
+        const userNotification = document.getElementById('js-text');
+        const button = document.getElementById('butt');
 
-        function myFunction () {
-            const firstAction = document.getElementById('js-input').value;
-            const entryAction = document.createElement('li');
-            if (firstAction !== '') {
-                document.getElementById('js-input').value = '';
-                entryAction.appendChild(document.createTextNode(firstAction));
-                list.appendChild(entryAction);
-                }  
+        function onAddNewTodo() {
+            const userEnteredAction = input.value;
+            const userOutputtingAction  = document.createElement('li');
+            if (userEnteredAction !== '') {
+                input.value = '';
+                userOutputtingAction.appendChild(document.createTextNode(userEnteredAction));
+                list.appendChild(userOutputtingAction);
+                userNotification.remove();
+            }  
         }
+
+        button.addEventListener('click', onAddNewTodo);
     </script>
 </body>
 </html>
