@@ -14,6 +14,18 @@
         <ol id="js-myList">
         </ol>     
     </div>
-    <script src="/index.js"></script>
+    <script>
+        const list = document.getElementById('js-myList');
+
+        function myFunction () {
+            const firstAction = document.getElementById('js-input').value;
+            const entryAction = document.createElement('li');
+            if (firstAction !== '') {
+                document.getElementById('js-input').value = '';
+                entryAction.appendChild(document.createTextNode(firstAction));
+                list.appendChild(entryAction);
+                }  
+        }
+    </script>
 </body>
 </html>
