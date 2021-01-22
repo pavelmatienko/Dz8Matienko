@@ -7,33 +7,50 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-    <input type="text" class="form-control" id="js-input" js-input placeholder="What do I need to do" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <button type="button" id="butt" class="btn btn-outline-danger"> add action </button>
+    <input type="text" class="form-control js-input" id="" placeholder="What do I need to do" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <button type="button" id="" class="btn btn-outline-danger js-button"> add action </button>
     <h1> My list to do : </h1>
     <div class="alert alert-primary" role="alert">
-        <ol id="js-myListTodo">
-            <p id="js-text"> ListTodo is empty </p>
+        <ol class="js-myListTodo" id="">
+            <p class="js-text" id="js-text"> List Todo is empty </p>
         </ol>     
     </div>
-    
+    <!-- <script src="/index.js"></script> -->
     <script>
-        const list = document.getElementById('js-myListTodo');
-        const input = document.getElementById('js-input');
-        const userNotification = document.getElementById('js-text');
-        const button = document.getElementById('butt');
-
+        const list = document.querySelector('.js-myListTodo');
+        const input = document.querySelector('.js-input');
+        const button = document.querySelector('.js-button');
+        const userNotification = document.querySelector('.js-text');
+        const buttonActionRemove = document.querySelector('.js-button-remove');
+        
         function onAddNewTodo() {
             const userEnteredAction = input.value;
-            const userOutputtingAction  = document.createElement('li');
+            const userOutputtingAction = document.createElement('li');
+            userOutputtingAction.innerHTML ='<button type="button" class="btn-close js-button-remove" aria-label="Close"></button>';
+            userOutputtingAction.style.backgroundColor = "yellow";
             if (userEnteredAction !== '') {
                 input.value = '';
                 userOutputtingAction.appendChild(document.createTextNode(userEnteredAction));
                 list.appendChild(userOutputtingAction);
-                userNotification.remove();
-            }  
-        }
-
+                userNotification.hidden = true;
+            };
+            return userOutputtingAction;
+        };
         button.addEventListener('click', onAddNewTodo);
+
+        function isActionComplete (evt) {
+            if(evt.target.tagName === 'LI'){
+                evt.target.style.background = '#00ff00';
+            }
+        };
+        list.addEventListener('click', isActionComplete);
+
+        function isActionDone(evt) {
+            if(evt.target.closest('.js-button-remove')) {
+                evt.target.closest('li').remove()
+            }
+        };
+        list.addEventListener('click', isActionDone);
     </script>
 </body>
 </html>
