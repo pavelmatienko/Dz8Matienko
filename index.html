@@ -17,24 +17,23 @@
     </div>
     <!-- <script src="/index.js"></script> -->
     <script>
-        const list = document.querySelector('.js-myListTodo');
+        const list = document.querySelector('.js-my-List-Todo');
         const input = document.querySelector('.js-input');
         const button = document.querySelector('.js-button');
         const userNotification = document.querySelector('.js-text');
         const buttonActionRemove = document.querySelector('.js-button-remove');
-        
+
+
         function onAddNewTodo() {
             const userEnteredAction = input.value;
             const userOutputtingAction = document.createElement('li');
-            userOutputtingAction.innerHTML ='<button type="button" class="btn-close js-button-remove" aria-label="Close"></button>';
+            userOutputtingAction.innerHTML = `${ userEnteredAction }<button type="button" class="btn-close js-button-remove" aria-label="Close"></button>`;
             userOutputtingAction.style.backgroundColor = "yellow";
             if (userEnteredAction !== '') {
                 input.value = '';
-                userOutputtingAction.appendChild(document.createTextNode(userEnteredAction));
                 list.appendChild(userOutputtingAction);
-                userNotification.hidden = true;
+                userNotification.remove();
             };
-            return userOutputtingAction;
         };
         button.addEventListener('click', onAddNewTodo);
 
@@ -47,10 +46,14 @@
 
         function isActionDone(evt) {
             if(evt.target.closest('.js-button-remove')) {
-                evt.target.closest('li').remove()
+                evt.target.closest('li').remove();
+                if (list.childElementCount === 0) {
+                    list.appendChild(userNotification);
+                }
             }
         };
         list.addEventListener('click', isActionDone);
+
     </script>
 </body>
 </html>
