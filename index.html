@@ -16,42 +16,42 @@
         </ol>     
     </div>
     <script>
-        const list = document.querySelector('.js-my-List-Todo');
-        const input = document.querySelector('.js-input');
-        const button = document.querySelector('.js-button');
-        const userNotification = document.querySelector('.js-text');
-        const buttonActionRemove = document.querySelector('.js-button-remove');
+            const list = document.querySelector('.js-my-List-Todo');
+            const input = document.querySelector('.js-input');
+            const button = document.querySelector('.js-button');
+            const userNotification = document.querySelector('.js-text');
+            const buttonActionRemove = document.querySelector('.js-button-remove');
 
 
-        function onAddNewTodo() {
-            const userEnteredAction = input.value;
-            const userOutputtingAction = document.createElement('li');
-            userOutputtingAction.innerHTML = `${ userEnteredAction }<button type="button" class="btn-close js-button-remove" aria-label="Close"></button>`;
-            userOutputtingAction.style.backgroundColor = "yellow";
-            if (userEnteredAction !== '') {
-                input.value = '';
-                list.appendChild(userOutputtingAction);
-                userNotification.remove();
+            function onAddNewTodo() {
+                const userEnteredAction = input.value;
+                const newActionElement = document.createElement('li');
+                newActionElement.innerHTML = `${ userEnteredAction }<button type="button" class="btn-close js-button-remove" aria-label="Close"></button>`;
+                newActionElement.style.backgroundColor = "yellow";
+                if (userEnteredAction !== '') {
+                    input.value = '';
+                    list.appendChild(newActionElement);
+                    userNotification.remove();
+                };
             };
-        };
-        button.addEventListener('click', onAddNewTodo);
+            button.addEventListener('click', onAddNewTodo);
 
-        function isActionComplete (evt) {
-            if(evt.target.tagName === 'LI'){
-                evt.target.style.background = '#00ff00';
-            }
-        };
-        list.addEventListener('click', isActionComplete);
-
-        function isActionDone(evt) {
-            if(evt.target.closest('.js-button-remove')) {
-                evt.target.closest('li').remove();
-                if (list.childElementCount === 0) {
-                    list.appendChild(userNotification);
+            function isActionComplete (evt) {
+                if(evt.target.tagName === 'LI'){
+                    evt.target.style.background = '#00ff00';
                 }
-            }
-        };
-        list.addEventListener('click', isActionDone);
+            };
+            list.addEventListener('click', isActionComplete);
+
+            function isActionDone(evt) {
+                if(evt.target.closest('.js-button-remove')) {
+                    evt.target.closest('li').remove();
+                    if (list.childElementCount === 0) {
+                        list.appendChild(userNotification);
+                    }
+                }
+            };
+            list.addEventListener('click', isActionDone);
     </script>
 </body>
 </html>
