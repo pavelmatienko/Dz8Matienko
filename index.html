@@ -11,11 +11,10 @@
     <button type="button" id="" class="btn btn-outline-danger js-button"> add action </button>
     <h1> My list to do : </h1>
     <div class="alert alert-primary" role="alert">
-        <ol class="js-myListTodo" id="">
-            <p class="js-text" id="js-text"> List Todo is empty </p>
+        <ol class="js-my-List-Todo" id="">
+            <h3 class="js-text" id=""> List Todo is empty </h3>
         </ol>     
     </div>
-    <!-- <script src="/index.js"></script> -->
     <script>
         const list = document.querySelector('.js-my-List-Todo');
         const input = document.querySelector('.js-input');
@@ -53,7 +52,6 @@
             }
         };
         list.addEventListener('click', isActionDone);
-
     </script>
 </body>
 </html>
